@@ -22,20 +22,21 @@ class ScoreViewModel(application: Application, userId: Int) : AndroidViewModel(a
     private val player: LiveData<Player> = repository.getPlayer(userId)
 
     val name = Transformations.map(player) { it.name }
-    val score = Transformations.map(player) { it.score?.toString() }
+    val score = Transformations.map(player) { it.actions.sum().toString() }
+    val actions = Transformations.map(player){it.actions}
     val pointsToChange = MutableLiveData<String>()
     val buttonsEnabled = Transformations.map(pointsToChange) { it.isNotEmpty() }
     val closeDialog = MutableLiveData<Any>()
 
     fun add() {
         val player = player.value!!
-        player.score = player.score?.plus(pointsToChange.value?.toInt()!!)
+        pointsToChange.value?.toInt()?.let { player.actions.add(it) }
         persistAndNotify(player)
     }
 
     fun subtract() {
         val player = player.value!!
-        player.score = player.score?.minus(pointsToChange.value?.toInt()!!)
+        pointsToChange.value?.toInt()?.let { player.actions.add(it * -1) }
         persistAndNotify(player)
     }
 
@@ -45,7 +46,7 @@ class ScoreViewModel(application: Application, userId: Int) : AndroidViewModel(a
             closeDialog.postValue(true)
             Toast.makeText(
                 getApplication(),
-                getApplication<Application>().getString(R.string.notification_new_score, player.name, player.score),
+                getApplication<Application>().getString(R.string.notification_new_score, player.name, player.actions.sum()),
                 Toast.LENGTH_LONG
             ).show()
         }

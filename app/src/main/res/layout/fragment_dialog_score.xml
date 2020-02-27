@@ -53,14 +53,25 @@
 
         <TextView
             android:id="@+id/textview_current_score"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/margin"
             android:paddingEnd="@dimen/margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:gravity="end"
             android:paddingBottom="@dimen/margin"
+            app:layout_constraintStart_toStartOf="parent"
             android:text="@{viewmodel.score}"
-            app:layout_constraintTop_toBottomOf="@id/textview_name"
-            tools:text="Player One" />
+            app:layout_constraintTop_toBottomOf="@id/actions"
+            tools:text="12" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/actions"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_name" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layout_score"

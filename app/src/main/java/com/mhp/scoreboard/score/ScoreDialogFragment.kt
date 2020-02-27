@@ -12,8 +12,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.mhp.scoreboard.R
 import com.mhp.scoreboard.databinding.FragmentDialogScoreBinding
+import kotlinx.android.synthetic.main.fragment_dialog_score.actions
 import kotlinx.android.synthetic.main.fragment_dialog_score.input_score
 
 
@@ -38,14 +41,29 @@ class ScoreDialogFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         input_score.setOnFocusChangeListener { _, _ ->
             input_score.post {
-                val inputMethodManager: InputMethodManager =
-                    activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                inputMethodManager.showSoftInput(input_score, InputMethodManager.SHOW_IMPLICIT)
+                val inputMethodManager: InputMethodManager? =
+                    activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+                inputMethodManager?.showSoftInput(input_score, InputMethodManager.SHOW_IMPLICIT)
             }
         }
         input_score.requestFocus()
+
+        prepareRecyclerView()
         super.onViewCreated(view, savedInstanceState)
     }
+
+    private fun prepareRecyclerView() {
+        val adapter = ActionListAdapter(requireContext())
+        actions.adapter = adapter
+        actions.addItemDecoration(DividerItemDecoration(actions.context, DividerItemDecoration.VERTICAL))
+
+        actions.layoutManager = LinearLayoutManager(requireContext())
+        model.actions.observe(this.viewLifecycleOwner, Observer { actions ->
+            // Update the cached copy of the words in the adapter.
+            actions?.let { adapter.setPlayers(it) }
+        })
+    }
+
 
     class BaseViewModelFactory<T>(val creator: () -> T) : ViewModelProvider.Factory {
 

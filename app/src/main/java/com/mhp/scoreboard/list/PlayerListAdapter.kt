@@ -34,14 +34,14 @@ class PlayerListAdapter internal constructor(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordViewHolder {
-        val itemView = inflater.inflate(R.layout.recyclerview_item, parent, false)
+        val itemView = inflater.inflate(R.layout.recyclerview_item_player, parent, false)
         return WordViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: WordViewHolder, position: Int) {
-        val current = players[position]
-        holder.playItemNameView.text = current.name
-        holder.playItemScoreView.text = current.score.toString()
+        val currentPlayer = players[position]
+        holder.playItemNameView.text = currentPlayer.name
+        holder.playItemScoreView.text =  currentPlayer.actions.sum().toString()
     }
 
     internal fun setPlayers(list: List<Player>) {
