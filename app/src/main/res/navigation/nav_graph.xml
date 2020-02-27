@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/ListFragment">
+
+    <dialog
+        android:id="@+id/UserScoreDialog"
+        android:name="com.mhp.scoreboard.score.ScoreDialogFragment"
+        android:label="@string/score_fragment_label"
+        tools:layout="@layout/fragment_dialog_score">
+
+        <action
+            android:id="@+id/action_ScoreFragment_to_ListFragment"
+            app:destination="@id/ListFragment" />
+
+        <argument
+            android:name="id"
+            app:argType="integer" />
+
+    </dialog>
+
+    <dialog
+        android:id="@+id/PlayerCreateDialog"
+        android:name="com.mhp.scoreboard.createplayer.CreatePlayerDialogFragment"
+        android:label="@string/create_player_fragment_label"
+        tools:layout="@layout/fragment_dialog_create_player">
+
+        <action
+            android:id="@+id/action_CreatePlayer_to_ListFragment"
+            app:destination="@id/ListFragment" />
+
+    </dialog>
+
+    <fragment
+        android:id="@+id/ListFragment"
+        android:name="com.mhp.scoreboard.list.PlayerListFragment"
+        android:label="@string/board_fragment_label"
+        tools:layout="@layout/fragment_list">
+
+        <action
+            android:id="@+id/action_List_to_Score"
+            app:destination="@id/UserScoreDialog">
+
+        </action>
+
+        <action
+            android:id="@+id/action_List_to_Create"
+            app:destination="@id/PlayerCreateDialog" />
+
+    </fragment>
+
+</navigation>

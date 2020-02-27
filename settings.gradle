@@ -1,0 +1,2 @@
+rootProject.name='Track Times'
+include ':app'

@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Scoreboard</string>
+    <string name="action_clear">Clear</string>
+    <string name="next">Next</string>
+    <string name="create">Create</string>
+    <string name="form_name">Name</string>
+    <string name="form_points">Points</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="board_fragment_label">ScoreBoardFragment</string>
+    <string name="score_fragment_label">ScoreDialogFragment</string>
+    <string name="create_player_fragment_label">CreatePlayerDialogFragment</string>
+    <string name="notification_new_score">Current score for %1$s is %2$d</string>
+    <string name="button_add">+</string>
+    <string name="button_substract">-</string>
+</resources>
