@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,13 +14,14 @@ import com.mhp.scoreboard.R
 import com.mhp.scoreboard.databinding.FragmentListBinding
 import kotlinx.android.synthetic.main.fragment_list.fab
 import kotlinx.android.synthetic.main.fragment_list.recyclerview
+import org.koin.android.viewmodel.ext.android.viewModel
 
 /**
  * [Fragment] that holds the list of players and navigates to the score of a selected player or to the create player form
  */
 class PlayerListFragment : Fragment(), PlayerListAdapter.OnItemClickListener {
 
-    private lateinit var model: PlayerListViewModel
+    private val model: PlayerListViewModel by viewModel()
     private lateinit var binding: FragmentListBinding
     private var windowTransitionTime: Long = 0
 
@@ -32,7 +32,6 @@ class PlayerListFragment : Fragment(), PlayerListAdapter.OnItemClickListener {
         windowTransitionTime = resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
         val viewRoot = LayoutInflater.from(activity).inflate(R.layout.fragment_list, container, false)
         binding = DataBindingUtil.bind(viewRoot)!!
-        model = ViewModelProvider(this).get(PlayerListViewModel::class.java)
         binding.viewmodel = model
         return viewRoot
     }

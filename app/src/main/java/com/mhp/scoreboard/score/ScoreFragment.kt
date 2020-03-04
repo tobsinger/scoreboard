@@ -9,8 +9,6 @@ import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -20,18 +18,20 @@ import com.mhp.scoreboard.databinding.FragmentScoreBinding
 import kotlinx.android.synthetic.main.activity_main.toolbar
 import kotlinx.android.synthetic.main.fragment_score.actions
 import kotlinx.android.synthetic.main.fragment_score.input_score
-
+import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class ScoreFragment : Fragment() {
 
-    private lateinit var model: ScoreViewModel
+    private val model: ScoreViewModel by viewModel {
+        parametersOf(args.id)
+    }
     private lateinit var binding: FragmentScoreBinding
     private val args: ScoreFragmentArgs by navArgs()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        model = BaseViewModelFactory { activity?.application?.let { ScoreViewModel(it, args.id) } }.create(ScoreViewModel::class.java)
         observeViewModel()
         val viewRoot = LayoutInflater.from(activity).inflate(R.layout.fragment_score, container, false)
         binding = DataBindingUtil.bind(viewRoot)!!
@@ -44,12 +44,11 @@ class ScoreFragment : Fragment() {
         model.back.observe(this.viewLifecycleOwner, Observer {
             findNavController().navigateUp()
         })
-        model.title.observe(this.viewLifecycleOwner, Observer {title->
-            activity?.toolbar?.title =title
+        model.title.observe(this.viewLifecycleOwner, Observer { title ->
+            activity?.toolbar?.title = title
 
         })
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         input_score.setOnFocusChangeListener { _, _ ->
@@ -75,7 +74,6 @@ class ScoreFragment : Fragment() {
         val adapter = ActionListAdapter(requireContext())
         actions.adapter = adapter
         actions.addItemDecoration(DividerItemDecoration(actions.context, DividerItemDecoration.VERTICAL))
-
         actions.layoutManager = LinearLayoutManager(requireContext())
         model.actions.observe(this.viewLifecycleOwner, Observer { actionItems ->
             // Update the cached copy of the words in the adapter.
@@ -89,14 +87,5 @@ class ScoreFragment : Fragment() {
                 actions.postDelayed({ actions.scrollToPosition(position) }, 100)
             }
         })
-    }
-
-
-    class BaseViewModelFactory<T>(val creator: () -> T) : ViewModelProvider.Factory {
-
-        @Suppress("UNCHECKED_CAST")
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return creator() as T
-        }
     }
 }

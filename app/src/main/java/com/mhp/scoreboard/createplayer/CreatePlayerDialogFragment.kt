@@ -13,24 +13,23 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.mhp.scoreboard.R
 import com.mhp.scoreboard.databinding.FragmentDialogCreatePlayerBinding
 import kotlinx.android.synthetic.main.fragment_dialog_create_player.input_name
+import org.koin.android.viewmodel.ext.android.viewModel
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
 class CreatePlayerDialogFragment : DialogFragment() {
 
-    private lateinit var model: CreatePlayerViewModel
+    private val model: CreatePlayerViewModel by viewModel()
     private lateinit var binding: FragmentDialogCreatePlayerBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        model = ViewModelProvider(this).get(CreatePlayerViewModel::class.java)
         model.closeDialog.observe(this.viewLifecycleOwner, Observer { dismiss() })
         val viewRoot = LayoutInflater.from(activity).inflate(R.layout.fragment_dialog_create_player, container, false)
         binding = DataBindingUtil.bind(viewRoot)!!
