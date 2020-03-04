@@ -17,7 +17,6 @@ class PlayerListViewModel(application: Application) : AndroidViewModel(applicati
     init {
         val dao: PlayerDao = PlayerDatabase.getDatabase(application).playerDao()
         repository = PlayerRepository(dao)
-
         players = repository.allPlayers
     }
 

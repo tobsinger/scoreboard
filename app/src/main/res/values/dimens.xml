@@ -1,5 +1,8 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
-
+    <dimen name="marginSmall">8dp</dimen>
     <dimen name="margin">16dp</dimen>
+
+    <dimen name="textSizeLarge">16pt</dimen>
+
 </resources>

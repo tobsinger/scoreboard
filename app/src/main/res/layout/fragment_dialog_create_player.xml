@@ -23,12 +23,12 @@
             android:id="@+id/layout_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin"
-            android:theme="@style/TextInputLayoutAppearance">
+            android:layout_margin="@dimen/margin">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/input_name"
                 android:layout_width="match_parent"
+                android:inputType="textCapWords"
                 android:layout_height="wrap_content"
                 android:text="@={viewmodel.name}"
                 android:hint="@string/form_name"

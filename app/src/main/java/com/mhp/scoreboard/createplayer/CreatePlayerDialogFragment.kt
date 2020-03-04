@@ -42,14 +42,12 @@ class CreatePlayerDialogFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         input_name.setOnFocusChangeListener { _, _ ->
             input_name.post {
-                val inputMethodManager: InputMethodManager =
-                    activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                inputMethodManager.showSoftInput(input_name, InputMethodManager.SHOW_IMPLICIT)
+                val inputMethodManager: InputMethodManager? =
+                    activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+                inputMethodManager?.showSoftInput(input_name, InputMethodManager.SHOW_IMPLICIT)
             }
         }
         input_name.requestFocus()
-
-
         input_name.setOnEditorActionListener { _: TextView, i: Int, _: KeyEvent? ->
             if (i == EditorInfo.IME_ACTION_DONE) {
                 model.submit()
@@ -57,7 +55,6 @@ class CreatePlayerDialogFragment : DialogFragment() {
             } else {
                 false
             }
-
         }
 
         super.onViewCreated(view, savedInstanceState)

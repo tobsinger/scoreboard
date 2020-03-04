@@ -6,72 +6,61 @@
     tools:context=".createplayer.CreatePlayerDialogFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:animateLayoutChanges="true"
         android:gravity="center"
-        android:minWidth="200dp"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/button_subtract"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin"
-            android:enabled="@{viewmodel.buttonsEnabled}"
-            android:onClick="@{() -> viewmodel.subtract()}"
-            android:text="@string/button_substract"
-            android:tint="@color/colorPrimary"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/button_add"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layout_score" />
-
-        <Button
-            android:id="@+id/button_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin"
-            android:enabled="@{viewmodel.buttonsEnabled}"
-            android:onClick="@{() -> viewmodel.add()}"
-            android:text="@string/button_add"
-            android:tint="@color/colorPrimary"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/button_subtract"
-            app:layout_constraintTop_toBottomOf="@id/layout_score" />
-
-        <TextView
-            android:id="@+id/textview_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/margin"
-            android:text="@{viewmodel.name}"
-            android:textStyle="bold"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Player One" />
 
         <TextView
             android:id="@+id/textview_current_score"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:paddingStart="@dimen/margin"
-            android:paddingEnd="@dimen/margin"
-            app:layout_constraintEnd_toEndOf="parent"
             android:gravity="end"
-            android:paddingBottom="@dimen/margin"
-            app:layout_constraintStart_toStartOf="parent"
+            android:padding="@dimen/margin"
             android:text="@{viewmodel.score}"
-            app:layout_constraintTop_toBottomOf="@id/actions"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/textSizeLarge"
+            app:layout_constraintBottom_toTopOf="@id/layout_score"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             tools:text="12" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/actions"
             android:layout_width="0dp"
-            android:layout_height="200dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/textview_current_score"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textview_name" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_subtract"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin"
+            android:enabled="@{viewmodel.buttonsEnabled}"
+            android:onClick="@{() -> viewmodel.subtract()}"
+            android:text="@string/button_subtract"
+            android:textSize="24pt"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/button_add"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_add"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin"
+            android:enabled="@{viewmodel.buttonsEnabled}"
+            android:onClick="@{() -> viewmodel.add()}"
+            android:text="@string/button_add"
+            android:textSize="24pt"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/button_subtract" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layout_score"
@@ -79,9 +68,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin"
             android:layout_marginTop="@dimen/margin"
+            app:layout_constraintBottom_toTopOf="@id/button_subtract"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textview_current_score">
+            app:layout_constraintStart_toStartOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/input_score"
@@ -89,7 +78,8 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/form_points"
                 android:inputType="number"
-                android:text="@={viewmodel.pointsToChange}" />
+                android:text="@={viewmodel.pointsToChange}"
+                android:textSize="@dimen/textSizeLarge" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

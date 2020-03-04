@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorBrandMain">#14B7CC</color>
+    <color name="colorBrandMainDark">#00A2B8</color>
+    <color name="colorBrandContrast">#FF0082</color>
+
+</resources>

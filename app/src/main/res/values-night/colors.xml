@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorBackground">#121212</color>
+<!--    <color name="colorPrimary">@android:color/white</color>-->
+    <color name="colorPrimaryDark">@android:color/black</color>
+
+    <color name="colorToolbar">@color/colorBackground</color>
+    <color name="colorTitleText">@color/colorBrandMain</color>
+    <color name="colorSecondary">@color/colorBrandMain</color>
+    <color name="primaryText">@android:color/white</color>
+
+</resources>

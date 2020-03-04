@@ -6,42 +6,35 @@
     app:startDestination="@id/ListFragment">
 
     <dialog
-        android:id="@+id/UserScoreDialog"
-        android:name="com.mhp.scoreboard.score.ScoreDialogFragment"
-        android:label="@string/score_fragment_label"
-        tools:layout="@layout/fragment_dialog_score">
+        android:id="@+id/PlayerCreateDialog"
+        android:name="com.mhp.scoreboard.createplayer.CreatePlayerDialogFragment"
+        android:label="@string/create_player_fragment_label"
+        tools:layout="@layout/fragment_dialog_create_player" />
 
-        <action
-            android:id="@+id/action_ScoreFragment_to_ListFragment"
-            app:destination="@id/ListFragment" />
+    <fragment
+        android:id="@+id/UserScoreFragment"
+        android:name="com.mhp.scoreboard.score.ScoreFragment"
+        tools:layout="@layout/fragment_score">
 
         <argument
             android:name="id"
             app:argType="integer" />
 
-    </dialog>
-
-    <dialog
-        android:id="@+id/PlayerCreateDialog"
-        android:name="com.mhp.scoreboard.createplayer.CreatePlayerDialogFragment"
-        android:label="@string/create_player_fragment_label"
-        tools:layout="@layout/fragment_dialog_create_player">
-
-        <action
-            android:id="@+id/action_CreatePlayer_to_ListFragment"
-            app:destination="@id/ListFragment" />
-
-    </dialog>
+    </fragment>
 
     <fragment
         android:id="@+id/ListFragment"
         android:name="com.mhp.scoreboard.list.PlayerListFragment"
-        android:label="@string/board_fragment_label"
+        android:label="@string/app_name"
         tools:layout="@layout/fragment_list">
 
         <action
             android:id="@+id/action_List_to_Score"
-            app:destination="@id/UserScoreDialog">
+            app:destination="@id/UserScoreFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right">
 
         </action>
 
