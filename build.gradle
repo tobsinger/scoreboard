@@ -6,16 +6,17 @@ buildscript {
     ext.fragment_version = '1.2.2'
     ext.androidx_test_version = '1.2.0'
     ext.koin_version = "2.0.1"
+    ext.navigation_version = "2.3.0-alpha03"
 
     repositories {
         google()
         jcenter()
-        
+
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.6.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:1.0.0"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -26,7 +27,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
+
     }
 }
 

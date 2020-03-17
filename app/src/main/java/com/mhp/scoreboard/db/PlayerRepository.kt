@@ -18,7 +18,7 @@ class PlayerRepository(private val playerDao: PlayerDao) {
         playerDao.insertPlayer(player)
     }
 
-    suspend fun nukeTable(){
+    suspend fun nukeTable() {
         playerDao.nukeTable()
     }
 }

@@ -1,21 +1,23 @@
 package com.mhp.scoreboard.createplayer
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.filters.LargeTest
-import com.mhp.scoreboard.createplayer.CreatePlayerRobot.Companion.createPlayer
+import com.mhp.scoreboard.createplayer.CreatePlayerRobot.Companion.withCreatePlayerRobot
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.koin.test.KoinTest
 
-
-@LargeTest
 @RunWith(AndroidJUnit4::class)
-class CreatePlayerTest {
+class CreatePlayerTest : KoinTest {
 
     @Test
     fun testCreatePlayer() {
-        createPlayer {
-            setName("foo")
-            clickOk()
+        withCreatePlayerRobot {
+            val name = "John Doe"
+            enterName(name)
+            clickOk {
+                verifyNavigateToPlayerList()
+                verifyPlayerCreated(name)
+            }
         }
     }
 }
